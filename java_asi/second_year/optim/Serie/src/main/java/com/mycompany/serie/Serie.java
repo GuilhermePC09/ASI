@@ -6,6 +6,7 @@ package com.mycompany.serie;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 /**
  *
@@ -47,59 +48,20 @@ public class Serie {
                 }
             }
     }
-
-    private double calculateMeanAbsoluteDifference() {
-        double sum = 0.0;
-        for (int i = 1; i < size(); i++) {
-            sum += Math.abs(values.get(i) - values.get(i - 1));
-        }
-        return sum / (size() - 1);
-    }
-
-    private double calculateStandardDeviationAbsoluteDifference() {
-        double mean = calculateMeanAbsoluteDifference();
-        double sum = 0.0;
-        for (int i = 1; i < size(); i++) {
-            double diff = Math.abs(values.get(i) - values.get(i - 1)) - mean;
-            sum += Math.pow(diff, 2);
-        }
-        return Math.sqrt(sum / (size() - 1));
-    }
     
     public int size() {
         return values.size();
     }
 
-    public void populate(int numberOfValues, double min, double max) {
+    public void populate(int numberOfValues, double min, double max, boolean deleteOutliers) {
         populateWithValues(numberOfValues, min, max);
         populateWithTimes(numberOfValues, 24);
+        if(deleteOutliers){
+            deleteOutliers(1);
+        }
         analitics();
     }
 
-    public void removeOutliers() {
-        double mar = calculateMeanAbsoluteDifference();
-        double oar = calculateStandardDeviationAbsoluteDifference();
-
-        List<Integer> outliersIndexes = new ArrayList<>();
-        for (int i = 1; i < size() - 1; i++) {
-            double pdiff = Math.abs(values.get(i) - values.get(i - 1));
-            double fdiff = Math.abs(values.get(i + 1) - values.get(i));
-
-            if ((pdiff > mar + 10 * oar && fdiff > mar + 10 * oar) || (pdiff > mar + 10 * oar && fdiff < 0)) {
-                outliersIndexes.add(i);
-            }
-        }
-        // Remove the Outliers
-        for (int i = outliersIndexes.size() - 1; i >= 0; i--) {
-            int index = outliersIndexes.get(i);
-            values.remove(index);
-            times.remove(index);
-        }
-
-        // Check the new analitics
-        analitics();
-    }
-    
     public void analitics(){
         int sumv = 0;
         for(int i = 0 ; i < values.size(); i++) {
@@ -169,10 +131,40 @@ public class Serie {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public void deleteOutliers(double LAMBDA) {
+        if (analitics.size() < 2) {
+            // Verificar se há informações suficientes em analitics
+            System.out.println("Não há informações suficientes em analitics para calcular MOYENNE e DEVIATION.");
+            return;
+        }
+    
+        double MOYENNE = analitics.get(0);
+        double DEVIATION = analitics.get(2);
+    
+        Iterator<Double> valuesIterator = values.iterator();
+        Iterator<Double> timesIterator = times.iterator();
+    
+        int currentIndex = 0;
+        while (valuesIterator.hasNext() && timesIterator.hasNext()) {
+            double currentValue = valuesIterator.next();
+            double nextValue = valuesIterator.hasNext() ? valuesIterator.next() : Double.NaN;
+    
+            double pdiff = currentValue - (currentIndex == 0 ? 0 : nextValue);
+            double fdiff = timesIterator.next() - currentValue;
+    
+            if (Math.abs(pdiff) > (MOYENNE + LAMBDA * DEVIATION) && Math.abs(fdiff) > (MOYENNE + LAMBDA * DEVIATION) && pdiff * fdiff < 0) {
+                valuesIterator.remove();
+                timesIterator.remove();
+            }
+    
+            currentIndex++;
+        }
+    }
+    
+        
+        public static void main(String[] args) {
         Serie mySerie = new Serie("ExampleSeries");
-        mySerie.populate(100, 400, 2500);
-        mySerie.removeOutliers();
+        mySerie.populate(100, 400, 2500, true);
         System.out.println(mySerie.toString());
     }
 
