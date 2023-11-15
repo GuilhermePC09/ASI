@@ -48,7 +48,7 @@ hold on;
 plot(t, y(:, 2), 'r', 'DisplayName', 'Predator (Q)');
 
 % Plot the experimental data
-plot(Y(:, 1), 'LineStyle', '-', 'Color', '#0072BD', 'DisplayName', 'Experimental Prey');
+plot(Y(:, 1), 'LineStyle', '-', 'Color', 'g', 'DisplayName', 'Experimental Prey');
 plot(Y(:, 2), 'LineStyle', '-', 'Color', 'm', 'DisplayName', 'Experimental Predator');
 
 xlabel('Time');
@@ -107,7 +107,7 @@ hold on;
 plot(t, y(:, 2), 'r', 'DisplayName', 'Predator (Q)');
 
 % Plot the experimental data
-plot(Y(:, 1), 'LineStyle', '-', 'Color', '#0072BD', 'DisplayName', 'Experimental Prey');
+plot(Y(:, 1), 'LineStyle', '-', 'Color', 'g', 'DisplayName', 'Experimental Prey');
 plot(Y(:, 2), 'LineStyle', '-', 'Color', 'm', 'DisplayName', 'Experimental Predator');
 
 xlabel('Time');
@@ -154,6 +154,7 @@ for j = 1:(N - Np + 1)
 end
 
 % Plot the estimated parameters
+figure;
 subplot(3, 2, 1);
 plot(time, estimated_parameters(:, 1));
 title('Estimated r');

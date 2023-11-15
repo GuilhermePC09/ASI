@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+/**
+ *
+ * @author PIFFER CHRISTO Guilherme
  */
-
 package com.mycompany.serie;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author PIFFER CHRISTO Guilherme
- */
+
 public class Serie {
     private String name;
     
