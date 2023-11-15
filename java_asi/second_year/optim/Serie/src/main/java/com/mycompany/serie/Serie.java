@@ -6,7 +6,6 @@ package com.mycompany.serie;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 
 /**
  *
@@ -33,7 +32,7 @@ public class Serie {
 
     private void populateWithValues(int numberOfValues, double min, double max){
         while (values.size() < numberOfValues) {
-            double randomValue = Math.random() * 1000;
+            double randomValue = min + Math.random() * (max - min) * 1000;
             if(randomValue>=min && randomValue<=max){
                 values.add(Math.abs(randomValue));
             }
@@ -56,27 +55,25 @@ public class Serie {
     public void populate(int numberOfValues, double min, double max, boolean deleteOutliers) {
         populateWithValues(numberOfValues, min, max);
         populateWithTimes(numberOfValues, 24);
-        if(deleteOutliers){
-            deleteOutliers(1);
-        }
         analitics();
+        if (deleteOutliers) {
+            deleteOutliers(0.5);
+        }
     }
 
     public void analitics(){
-        int sumv = 0;
+        double sumv = 0;
         for(int i = 0 ; i < values.size(); i++) {
             sumv += values.get(i);
         }
-        double dv;
-        dv = (double) values.size();
+        double dv = (double) values.size();
         valuesAverage = sumv/dv;
         
-        int sumt = 0;
+        double sumt = 0;
         for(int i = 0 ; i < times.size(); i++) {
             sumt += times.get(i);
         }
-        double dt;
-        dt = (double) times.size();
+        double dt = (double) times.size();
         timesAverage = sumt/dt;
         
         double standardDeviationValues = 0.0;
@@ -131,40 +128,37 @@ public class Serie {
         return sb.toString();
     }
 
-    public void deleteOutliers(double LAMBDA) {
-        if (analitics.size() < 2) {
-            // Verificar se há informações suficientes em analitics
-            System.out.println("Não há informações suficientes em analitics para calcular MOYENNE e DEVIATION.");
-            return;
-        }
-    
+    public void deleteOutliers(double LAMBDA) {    
         double MOYENNE = analitics.get(0);
         double DEVIATION = analitics.get(2);
     
-        Iterator<Double> valuesIterator = values.iterator();
-        Iterator<Double> timesIterator = times.iterator();
+        List<Double> newValues = new ArrayList<>();
+        List<Double> newTimes = new ArrayList<>();
     
-        int currentIndex = 0;
-        while (valuesIterator.hasNext() && timesIterator.hasNext()) {
-            double currentValue = valuesIterator.next();
-            double nextValue = valuesIterator.hasNext() ? valuesIterator.next() : Double.NaN;
+        for (int i = 0; i < values.size(); i++) {
+            double currentValue = values.get(i);
+            double pdiff = i == 0 ? 0 : currentValue - values.get(i - 1);
+            double fdiff = i == values.size() - 1 ? 0 : values.get(i + 1) - currentValue;
     
-            double pdiff = currentValue - (currentIndex == 0 ? 0 : nextValue);
-            double fdiff = timesIterator.next() - currentValue;
-    
-            if (Math.abs(pdiff) > (MOYENNE + LAMBDA * DEVIATION) && Math.abs(fdiff) > (MOYENNE + LAMBDA * DEVIATION) && pdiff * fdiff < 0) {
-                valuesIterator.remove();
-                timesIterator.remove();
+            if (Math.abs(pdiff) <= (MOYENNE + LAMBDA * DEVIATION)){
+                if(Math.abs(fdiff) <= (MOYENNE + LAMBDA * DEVIATION)){
+                    if (pdiff * fdiff >= 0) {
+                        newValues.add(currentValue);
+                        newTimes.add(times.get(i));
+                    }
+                }
             }
-    
-            currentIndex++;
         }
+    
+        values = newValues;
+        times = newTimes;
+        analitics();
     }
     
         
         public static void main(String[] args) {
         Serie mySerie = new Serie("ExampleSeries");
-        mySerie.populate(100, 400, 2500, true);
+        mySerie.populate(10, 400, 2500, true);
         System.out.println(mySerie.toString());
     }
 
