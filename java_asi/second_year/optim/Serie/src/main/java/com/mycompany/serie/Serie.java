@@ -47,6 +47,24 @@ public class Serie {
                 }
             }
     }
+
+    private double calculateMeanAbsoluteDifference() {
+        double sum = 0.0;
+        for (int i = 1; i < size(); i++) {
+            sum += Math.abs(values.get(i) - values.get(i - 1));
+        }
+        return sum / (size() - 1);
+    }
+
+    private double calculateStandardDeviationAbsoluteDifference() {
+        double mean = calculateMeanAbsoluteDifference();
+        double sum = 0.0;
+        for (int i = 1; i < size(); i++) {
+            double diff = Math.abs(values.get(i) - values.get(i - 1)) - mean;
+            sum += Math.pow(diff, 2);
+        }
+        return Math.sqrt(sum / (size() - 1));
+    }
     
     public int size() {
         return values.size();
@@ -55,6 +73,30 @@ public class Serie {
     public void populate(int numberOfValues, double min, double max) {
         populateWithValues(numberOfValues, min, max);
         populateWithTimes(numberOfValues, 24);
+        analitics();
+    }
+
+    public void removeOutliers() {
+        double mar = calculateMeanAbsoluteDifference();
+        double oar = calculateStandardDeviationAbsoluteDifference();
+
+        List<Integer> outliersIndexes = new ArrayList<>();
+        for (int i = 1; i < size() - 1; i++) {
+            double pdiff = Math.abs(values.get(i) - values.get(i - 1));
+            double fdiff = Math.abs(values.get(i + 1) - values.get(i));
+
+            if ((pdiff > mar + 10 * oar && fdiff > mar + 10 * oar) || (pdiff > mar + 10 * oar && fdiff < 0)) {
+                outliersIndexes.add(i);
+            }
+        }
+        // Remove the Outliers
+        for (int i = outliersIndexes.size() - 1; i >= 0; i--) {
+            int index = outliersIndexes.get(i);
+            values.remove(index);
+            times.remove(index);
+        }
+
+        // Check the new analitics
         analitics();
     }
     
@@ -130,6 +172,8 @@ public class Serie {
     public static void main(String[] args) {
         Serie mySerie = new Serie("ExampleSeries");
         mySerie.populate(100, 400, 2500);
+        mySerie.removeOutliers();
         System.out.println(mySerie.toString());
     }
+
 }
