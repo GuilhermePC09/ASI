@@ -12,7 +12,7 @@ tol_opt       = 1e-8;
 options = optimset('Display','off',...
     'TolFun', tol_opt,...
     'MaxIter', 10000,...
-    'Algorithm', 'active-set',...
+    'Algorithm', 'interior-point-convex',...
     'TolConSQP', 1e-6);
 
 warning off
@@ -21,17 +21,17 @@ warning off
 mpciterations = 50;
 
 % Prediction time (continuous prediction horizon)
-T = ???;
+T = 4;
 
 % Discretization steps
-delta = ???;
+delta = 0.1;
 
 % Prediction horizon
-N = ???;
+N = T/delta;
 
 % System dynamics (continous)
-Ac = ???;
-Bc = ???;
+Ac = [-1 1;0 0.5];
+Bc = [0;1];
 
 n = length(Ac(1,:)); % state dimension
 m = length(Bc(1,:)); % input dimension
@@ -44,39 +44,47 @@ Ad = sysd.A;
 Bd = sysd.B;
 
 % Terminal state
-xTerm = ???;
+xTerm = [0.0; 0.0];
 
 % Cost parameters
-Q = ???;
-R = ???;
+Q = 0.5*eye(n);
+R = 1;
 
 % initial conditions
 tmeasure        = 0.0;          % initial time
-xmeasure        = ???;   % initial state
+xmeasure        = [0.6;0.8];   % initial state
 
 % Initial guess for open-loop input sequence
-u0              = ???;
+u0              = repmat(zeros(m,1),N,1);
 % Initial guess for the open-loop state sequence (order: [x_1(0);x_2(0);x_1(1);x_2(1);...])
-x0              = ???;
+x0              = repmat(xmeasure, N+1,1);
 
 % Inequality constraints (H_x*x <= k_x   and   H_u*u <= k_u)
-H_x = ???;
-k_x = ???;
+H_x = [1 0;
+    -1 0;
+    0 1;
+    0 -1];
+k_x = [1;
+    1;
+    1;
+    1];
 
-H_u = ???;
-k_u = ???;
-
+H_u = [1;
+    -1];
+k_u = [1;
+    1];
+%% 
 % ==============================================
 % Implement the MPC iteration
 % ==============================================
 
 % Use the quadprog command to solve the optimization problem
 % quadprog has the following command
-%
-% x = quadprog(H,f,A,b,Aeq,beq,[],[],x0,options)
-%
+
+%x = quadprog(H,f,A,b,Aeq,beq,[],[],x0,options)
+
 % x:        optimal solution
-%
+% 
 % H:        quadratic part of the cost
 % f:        linear part of the cost
 % A, b:     inequality constraints A x <= b
@@ -95,23 +103,56 @@ u = [];
 % Use matlab functions repmat if necessary
  
     % Inequality constraints
-    ???
+    Ax=[];
+    bx=[];
+    Au=[];
+    bu=[];
+    for k = 1:N
+       Ax=blkdiag(Ax,H_x); 
+       bx=[bx;k_x];
+       Au=blkdiag(Au,H_u);
+       bu=[bu;k_u];
+    end 
+    clear ('k')
     
+    Ax=blkdiag(Ax,H_x);
+    bx=[bx;k_x];
     
+    A=blkdiag(Ax,Au);
+    b=[bx;bu];
     % Equality constraints (dynamics)
-    ???
+   Aeq=zeros(n*(N+2),n*(N+1)+m*N);
+   beq=zeros(n*(N+2),1);
+    for k = 0:N-1
+        Aeq(n*k+1:n*(k+1), 1:n*(N+1))=[zeros(n,n*k),Ad,-eye(n),zeros(n,n*(N-1-k))];
+        Aeq(n*k+1:n*(k+1),n*(N+1)+1:end)=[zeros(n,m*k),Bd,zeros(n,m*(N-1-k))];
+    end
     
-    
+    clear('k')
     % Equality constraints (initial constraint)
-    ???
+    Aeq(n*N+1:n*(N+1),:)=[eye(n),zeros(n,m*N+n*N)];
+    beq(n*N+1:n*(N+1))=xmeasure;
     
     % Equality constraints (terminal constraint)
-    ???
+    Aeq(n*(N+1)+1:n*(N+2),:)=[zeros(n,n*N),eye(n),zeros(n,m*N)];
+    beq(n*(N+1)+1:n*(N+2))=xTerm;
     
     % Cost function
-    H = ???;
-    f = ???;
-
+    %stage cost
+    Qstack=[];
+    Rstack=[];
+    for k = 1:N
+        Qstack = blkdiag(Qstack,delta*Q);
+        Rstack = blkdiag(Rstack,delta*R);
+    end
+    clear('k')
+    %terminal cost=0
+    Qstack = blkdiag(Qstack,zeros(n));
+    
+    %overall cost
+    H = blkdiag(Qstack, Rstack);
+    f = zeros(1,n*(N+1)+m*N);
+ %%    
 % Print Header
 fprintf('   k  |      u(k)        x(1)        x(2)     Time \n');
 fprintf('---------------------------------------------------\n');
@@ -120,16 +161,18 @@ fprintf('---------------------------------------------------\n');
 for ii = 1:mpciterations
        
     %update constraints (initial constraint) based on current state x_measure
-    ???;   
+    beq(n*N+1:n*(N+1))=xmeasure;   
     
     t_Start = tic;
     
     % Solve optimization problem
-    solutionOL = ???;
+    solutionOL = quadprog(H, f, A, b, Aeq, beq, [], [], [x0;u0], options);
     
     % Derive the optimal predicted state and input sequence
-    x_OL = ???;
-    u_OL = ???;
+    x_OL_tilde=solutionOL(1:n*(N+1),1);
+    u_OL_tilde=solutionOL(n*(N+1)+1:end,1);
+    x_OL = reshape(x_OL_tilde,n,N+1);
+    u_OL = reshape(u_OL_tilde,m,N);
     
     t_Elapsed = toc( t_Start );
     
@@ -139,13 +182,13 @@ for ii = 1:mpciterations
     u = [ u, u_OL(:,1) ];
     
     % Update the closed-loop system
-    xmeasure = ???;
-    tmeasure = ???;
+    tmeasure = tmeasure + delta;
+    xmeasure = Ad * xmeasure + Bd * u_OL(1:m);
     
     % Prepare warmstart solution for next time step (take the endpiece of the optimal open-loop solution 
     % and add a last piece)
-    x0 = ???;
-    u0 = ???;
+    x0 = [x_OL_tilde(n+1:end);zeros(n,1)];
+    u0=[u_OL_tilde(m+1:end);zeros(m,1)];
     
     
     % Print results
