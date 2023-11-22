@@ -1,5 +1,7 @@
 package com.mycompany.be2_matrices;
 
+import java.awt.Graphics;
+
 public class Rectangle extends Shape {
 
     Point point1;
@@ -31,6 +33,34 @@ public class Rectangle extends Shape {
         return res;
     }
 
+    public double perimeter() {
+        if (this.width == 0) {
+            return 2 * (Math.abs(point1.abscisse() - point2.abscisse()) + Math.abs(point1.ordonne() - point2.ordonne()));
+        } else {
+            return 2 * (width + height);
+        }
+    }
+
+    public void plot(Graphics g) {
+        if (fill) {
+            if (this.width == 0) {
+                g.fillRect((int) point1.abscisse(), (int) point1.ordonne(),
+                           (int) Math.abs(point2.abscisse() - point1.abscisse()),
+                           (int) Math.abs(point2.ordonne() - point1.ordonne()));
+            } else {
+                g.fillRect((int) point.abscisse(), (int) point.ordonne(), (int) width, (int) height);
+            }
+        } else {
+            if (this.width == 0) {
+                g.drawRect((int) point1.abscisse(), (int) point1.ordonne(),
+                           (int) Math.abs(point2.abscisse() - point1.abscisse()),
+                           (int) Math.abs(point2.ordonne() - point1.ordonne()));
+            } else {
+                g.drawRect((int) point.abscisse(), (int) point.ordonne(), (int) width, (int) height);
+            }
+        }
+    }
+
     public boolean Inside(Point p) {
         boolean res = false;
         if (this.width == 0) {
@@ -41,7 +71,6 @@ public class Rectangle extends Shape {
         if ((p.abscisse() - point.abscisse() <= width) && (p.ordonne() - point.ordonne() <= height)) {
             res = true;
         }
-
         return res;
     }
 
