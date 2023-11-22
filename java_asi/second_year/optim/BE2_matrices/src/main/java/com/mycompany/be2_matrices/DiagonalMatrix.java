@@ -13,7 +13,7 @@ public class DiagonalMatrix extends SparseMatrix{
         if (i == j) {
             super.setValue(i, j, value);
         } else {
-            throw new IllegalArgumentException("Invalid indices for a diagonal matrix.");
+            throw new IllegalArgumentException("Invalid indices for a diagonal matrix in values: " + i + " " + j + "");
         }
     }  
 }

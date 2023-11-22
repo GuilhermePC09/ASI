@@ -18,7 +18,7 @@ public class SparseMatrix{
         if (i >= 0 && i < numberOfLines && j >= 0 && j < numberOfColumns) {
             map.put(new MatrixCoordinate(i, j), value);
         } else {
-            throw new IllegalArgumentException("Invalid index");
+            throw new IllegalArgumentException("Invalid index in values: " + i + " " + j + " ");
         }
     }
 
@@ -26,7 +26,7 @@ public class SparseMatrix{
         if (i >= 0 && i < numberOfLines && j >= 0 && j < numberOfColumns) {
             return map.get(new MatrixCoordinate(i, j));
         } else {
-            throw new IllegalArgumentException("Invalid index");
+            throw new IllegalArgumentException("Invalid index in values: " + i + " " + j + " ");
         }
     }
 
