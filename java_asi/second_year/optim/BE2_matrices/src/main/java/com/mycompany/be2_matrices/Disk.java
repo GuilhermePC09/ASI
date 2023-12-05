@@ -1,24 +1,28 @@
 package com.mycompany.be2_matrices;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Disk extends Shape {
 
-    Point center;
-    double radius = 0;
-    Point point1;
-    Point point2;
+    private Point center;
+    private double radius = 0;
+    private Point point1;
+    private Point point2;
+    private Color color;
 
-    public Disk(Point cen, double r) {
+    public Disk(Point cen, double r, Color c) {
         super();
         this.center = cen;
         this.radius = r;
+        this.color = c;
     }
 
-    public Disk(Point p1, Point p2) {
+    public Disk(Point p1, Point p2, Color c) {
         super();
         this.point1 = p1;
         this.point2 = p2;
+        this.color = c;
     }
 
     @Override
@@ -42,6 +46,7 @@ public class Disk extends Shape {
 
     public void plot(Graphics g) {
         if (fill) {
+            g.setColor(color);
             g.fillOval((int) (center.abscisse() - radius), (int) (center.ordonne() - radius), (int) (2 * radius),
                     (int) (2 * radius));
         } else {

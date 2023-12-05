@@ -1,17 +1,18 @@
 package com.mycompany.be2_matrices;
 
+import java.awt.Color;
 import javax.swing.*;
 
 public class main_shapes {
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
 
-        int rectangle1Id = canvas.addShape(new Rectangle(new Point(500, 500), 30, 20));
-        int rectangle2Id = canvas.addShape(new Rectangle(new Point(10, 10), new Point(-4, -3)));
-        int disk1Id = canvas.addShape(new Disk(new Point(100, 100), 30));
-        int disk2Id = canvas.addShape(new Disk(new Point(1, 3), new Point(2, -2)));
-        int squareId = canvas.addShape(new Square(new Point(3, 3), 4));
-        int polygon = canvas.addShape(new Polygon(new Point(800, 600), 6, 50));
+        int rectangle1Id = canvas.addShape(new Rectangle(new Point(500, 500), 30, 20, Color.green));
+        int rectangle2Id = canvas.addShape(new Rectangle(new Point(10, 10), new Point(-4, -3), Color.gray));
+        int disk1Id = canvas.addShape(new Disk(new Point(100, 100), 30, Color.blue));
+        int disk2Id = canvas.addShape(new Disk(new Point(1, 3), new Point(2, -2), Color.blue));
+        int squareId = canvas.addShape(new Square(new Point(3, 3), 4, Color.pink));
+        int polygon = canvas.addShape(new Polygon(new Point(400, 600), 6, 50, Color.cyan));
 
         canvas.getShapeWithID(rectangle1Id).setFilling(true);
         canvas.getShapeWithID(rectangle2Id).setFilling(true);

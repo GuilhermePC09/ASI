@@ -1,26 +1,30 @@
 package com.mycompany.be2_matrices;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Rectangle extends Shape {
 
-    Point point1;
-    Point point2;
-    Point point;
-    double width = 0;
-    double height;
+    private Point point1;
+    private Point point2;
+    private Point point;
+    private double width = 0;
+    private double height;
+    private Color color;
 
-    public Rectangle(Point p1, Point p2) {
+    public Rectangle(Point p1, Point p2, Color c) {
         super();
         this.point1 = p1;
         this.point2 = p2;
+        this.color = c;
     }
 
-    public Rectangle(Point p, double w, double h) {
+    public Rectangle(Point p, double w, double h, Color c) {
         super();
         this.point = p;
         this.width = w;
         this.height = h;
+        this.color = c;
     }
 
     public double surface() {
@@ -44,10 +48,12 @@ public class Rectangle extends Shape {
     public void plot(Graphics g) {
         if (fill) {
             if (this.width == 0) {
+                g.setColor(color);
                 g.fillRect((int) point1.abscisse(), (int) point1.ordonne(),
                            (int) Math.abs(point2.abscisse() - point1.abscisse()),
                            (int) Math.abs(point2.ordonne() - point1.ordonne()));
             } else {
+                g.setColor(color);
                 g.fillRect((int) point.abscisse(), (int) point.ordonne(), (int) width, (int) height);
             }
         } else {

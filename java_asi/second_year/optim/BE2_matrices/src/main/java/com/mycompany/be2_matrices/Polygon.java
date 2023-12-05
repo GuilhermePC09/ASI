@@ -1,17 +1,20 @@
 package com.mycompany.be2_matrices;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Polygon extends Shape {
     private Point center;
     private int sides;
     private double sideLength;
+    private Color color;
 
-    public Polygon(Point center, int sides, double sideLength) {
+    public Polygon(Point center, int sides, double sideLength, Color c) {
         super();
         this.center = center;
         this.sides = sides;
         this.sideLength = sideLength;
+        this.color = c;
     }
 
     public double surface() {
@@ -33,6 +36,7 @@ public class Polygon extends Shape {
         }
 
         if (fill) {
+            g.setColor(color);;
             g.fillPolygon(xPoints, yPoints, sides);
         } else {
             g.drawPolygon(xPoints, yPoints, sides);
@@ -49,7 +53,7 @@ public class Polygon extends Shape {
             yPoints[i] = (int) (center.ordonne() + sideLength * Math.sin(angle * i));
         }
 
-        Polygon testPolygon = new Polygon(new Point(p.abscisse(), p.ordonne()), sides, sideLength);
+        Polygon testPolygon = new Polygon(new Point(p.abscisse(), p.ordonne()), sides, sideLength, Color.BLACK);
 
         int[] testXPoints = new int[sides];
         int[] testYPoints = new int[sides];
@@ -59,7 +63,7 @@ public class Polygon extends Shape {
             testYPoints[i] = (int) (p.ordonne() + sideLength * Math.sin(angle * i));
         }
 
-        Polygon testPointPolygon = new Polygon(new Point(p.abscisse(), p.ordonne()), sides, sideLength);
+        Polygon testPointPolygon = new Polygon(new Point(p.abscisse(), p.ordonne()), sides, sideLength, Color.BLACK);
 
         return isPointInPolygon(testPointPolygon, testXPoints, testYPoints);
     }
