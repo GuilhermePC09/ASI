@@ -49,7 +49,7 @@ G = inv(-C*inv(A-B*F)*B);
 sysbf=ss(A-B*F,[B*G],C,0);
 sysubf=ss(A-B*F,[B*G],-F,G); 
 
-figure;
+figure(1);
 bode(sysbf);
 title('Réponse en Fréquence en Boucle Fermée');
 
@@ -100,20 +100,41 @@ r = roots(poly3);
 Fe = acker(Ae, Be, r);
 F = [Fe(1) Fe(2) Fe(3)];
 G = [Fe(4)];
-
-Ai = [A-L*C-B*F B*G; 0 0];
-B1 = [0 0 1]';
-B2 = [L(1)' -1]';
-Fi = [F -G];
+% 
+% Ai = [A-L*C-B*F B*G; 0 0];
+% B1 = [0 0 1]';
+% B2 = [L(1)' -1]';
+% Fi = [F -G];
 
 s = tf('s');
 Gs = C * inv(s * eye(size(A)) - A)*B;
-% Kr_s = Gs - F * inv(s * eye(size(A)) - (A - B*F + L*C)) * B * Gs;
-% Ky_s = F * inv(s * eye(size(A)) - (A - B*F + L*C)) * L;
-Kr_s = -Fe * inv(s * eye(size(Ai)) - Ai)*B1
+Kr_s = Gs - F * inv(s * eye(size(A)) - (A - B*F + L*C)) * B * Gs;
+Ky_s = F * inv(s * eye(size(A)) - (A - B*F + L*C)) * L;
+% Kr_s = -Fe * inv(s * eye(size(Ai)) - Ai)*B1
 
 S = 1 / 1 + Gs*Ky_s*Kr_s;
 T = Gs*Ky_s*Kr_s / 1 + Gs*Ky_s*Kr_s;
+SG = S*G;
+KS = S*Ky_s*Kr_s;
+
+figure(2);
+
+subplot(2, 2, 1);
+bode(S); 
+title('S');
+
+subplot(2, 2, 2);
+bode(T);
+title('T');
+
+subplot(2, 2, 3);
+bode(SG);
+title('SG');
+
+subplot(2, 2, 4);
+bode(KS);
+title('KS');
+
 
 
 

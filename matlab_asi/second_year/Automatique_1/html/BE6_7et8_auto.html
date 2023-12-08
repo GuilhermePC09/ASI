@@ -1,0 +1,338 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>BE6_7et8_auto</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-12-06"><meta name="DC.source" content="BE6_7et8_auto.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">BE 6,7 et 8</a></li><li><a href="#2">Definition des param&egrave;tres</a></li><li><a href="#3">Definition des matrices du espace d'&eacute;tat</a></li><li><a href="#4">Conf&eacute;rence de la commandabilit&eacute;</a></li><li><a href="#5">D&eacute;couvrir F et G</a></li><li><a href="#6">R&eacute;ponse en fr&eacute;quence en boucle ferm&eacute;e</a></li><li><a href="#7">Observateur</a></li><li><a href="#8">Integrateur</a></li></ul></div><h2 id="1">BE 6,7 et 8</h2><p>PIFFER CHRISTO Guilherme</p><pre class="codeinput">close <span class="string">all</span>
+clear
+</pre><h2 id="2">Definition des param&egrave;tres</h2><pre class="codeinput">m = 0.05;
+g = 9.81;
+L = 0.01;
+R = 1;
+K = 0.0001;
+ieq = 5;
+heq = 0.01;
+
+a1 = -R/L;
+a2 = -(2*ieq*K) / (m*heq);
+a3 = (K*ieq^2) / (heq^2*m);
+b1 = 1/L;
+
+e = 0.5;
+wn = 20;
+p1 = 50;
+</pre><h2 id="3">Definition des matrices du espace d'&eacute;tat</h2><pre class="codeinput">A = [a1 0 0; 0 0 1; a2 a3 0];
+B = [b1; 0; 0];
+C = [0 1 0];
+</pre><h2 id="4">Conf&eacute;rence de la commandabilit&eacute;</h2><pre class="codeinput">Co = ctrb(A, B);
+rCo = rank(Co);
+
+<span class="keyword">if</span> rCo == size(A, 1)
+    disp(<span class="string">'Commandable'</span>);
+<span class="keyword">else</span>
+    disp(<span class="string">'Pas commandable.'</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Commandable
+</pre><h2 id="5">D&eacute;couvrir F et G</h2><pre class="codeinput">poly1 = [1, p1];
+poly2 = [1, 2*e*wn, wn^2];
+
+result_poly = conv(poly1, poly2);
+rts = roots(result_poly);
+
+F = place(A,B,rts);
+G = inv(-C*inv(A-B*F)*B);
+</pre><h2 id="6">R&eacute;ponse en fr&eacute;quence en boucle ferm&eacute;e</h2><pre class="codeinput">sysbf=ss(A-B*F,[B*G],C,0);
+sysubf=ss(A-B*F,[B*G],-F,G);
+
+figure(1);
+bode(sysbf);
+title(<span class="string">'R&eacute;ponse en Fr&eacute;quence en Boucle Ferm&eacute;e'</span>);
+
+<span class="comment">% Mesure de la fr&eacute;quence de coupure</span>
+[mag, phase, wout] = bode(sysbf);
+[~, index_wc] = min(abs(mag - 1/sqrt(2)));
+wc = wout(index_wc);
+
+disp([<span class="string">'Fr&eacute;quence de Coupure (wc) : '</span>, num2str(wc), <span class="string">' rad/s'</span>]);
+
+<span class="comment">% V&eacute;rification du temps de mont&eacute;e</span>
+trise_spec = 2.3/wc;
+trise_info = stepinfo(sysbf);
+trise_actuel = trise_info.RiseTime;
+
+disp([<span class="string">'Temps de Mont&eacute;e Sp&eacute;cifi&eacute; (trise) : '</span>, num2str(trise_spec), <span class="string">' s'</span>]);
+disp([<span class="string">'Temps de Mont&eacute;e Actuel (trise) : '</span>, num2str(trise_actuel), <span class="string">' s'</span>]);
+
+<span class="keyword">if</span> trise_actuel &lt;= trise_spec
+    disp(<span class="string">'Le temps de mont&eacute;e est conforme aux sp&eacute;cifications.'</span>);
+<span class="keyword">else</span>
+    disp(<span class="string">'Le temps de mont&eacute;e PAS conforme aux sp&eacute;cifications.'</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Fr&eacute;quence de Coupure (wc) : 23.1437 rad/s
+Temps de Mont&eacute;e Sp&eacute;cifi&eacute; (trise) : 0.099379 s
+Temps de Mont&eacute;e Actuel (trise) : 0.09003 s
+Le temps de mont&eacute;e est conforme aux sp&eacute;cifications.
+</pre><img vspace="5" hspace="5" src="BE6_7et8_auto_01.png" alt=""> <h2 id="7">Observateur</h2><pre class="codeinput">L = place(A',C',rts)';
+
+Ao = (A - L*C);
+Bo = [B L];
+Co = eye(3);
+Do = zeros(3, 2);
+
+
+delta_v = 5;
+</pre><h2 id="8">Integrateur</h2><pre class="codeinput">Ae = [A zeros(3,1); -C 0];
+Be = [B; 0];
+Ce = [C 0];
+wn = 25;
+e = 10/wn;
+
+poly3 = [1, 2.1*wn, 3.4*wn^2, 2.7*wn^3, wn^4];
+r = roots(poly3);
+
+Fe = acker(Ae, Be, r);
+F = [Fe(1) Fe(2) Fe(3)];
+G = [Fe(4)];
+<span class="comment">%</span>
+<span class="comment">% Ai = [A-L*C-B*F B*G; 0 0];</span>
+<span class="comment">% B1 = [0 0 1]';</span>
+<span class="comment">% B2 = [L(1)' -1]';</span>
+<span class="comment">% Fi = [F -G];</span>
+
+s = tf(<span class="string">'s'</span>);
+Gs = C * inv(s * eye(size(A)) - A)*B;
+Kr_s = Gs - F * inv(s * eye(size(A)) - (A - B*F + L*C)) * B * Gs;
+Ky_s = F * inv(s * eye(size(A)) - (A - B*F + L*C)) * L;
+<span class="comment">% Kr_s = -Fe * inv(s * eye(size(Ai)) - Ai)*B1</span>
+
+S = 1 / 1 + Gs*Ky_s*Kr_s;
+T = Gs*Ky_s*Kr_s / 1 + Gs*Ky_s*Kr_s;
+SG = S*G;
+KS = Ky_s*Kr_s*S;
+
+figure(2);
+
+subplot(2, 2, 1);
+bode(S);
+title(<span class="string">'S'</span>);
+
+subplot(2, 2, 2);
+bode(T);
+title(<span class="string">'T'</span>);
+
+subplot(2, 2, 3);
+bode(SG);
+title(<span class="string">'SG'</span>);
+
+subplot(2, 2, 4);
+bode(KS);
+title(<span class="string">'KS'</span>);
+</pre><img vspace="5" hspace="5" src="BE6_7et8_auto_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% BE 6,7 et 8 
+% PIFFER CHRISTO Guilherme
+
+close all
+clear
+%% Definition des paramètres
+m = 0.05;
+g = 9.81;
+L = 0.01;
+R = 1;
+K = 0.0001;
+ieq = 5;
+heq = 0.01;
+
+a1 = -R/L;
+a2 = -(2*ieq*K) / (m*heq);
+a3 = (K*ieq^2) / (heq^2*m);
+b1 = 1/L;
+
+e = 0.5;
+wn = 20;
+p1 = 50;
+
+%% Definition des matrices du espace d'état
+A = [a1 0 0; 0 0 1; a2 a3 0];
+B = [b1; 0; 0];
+C = [0 1 0];
+
+%% Conférence de la commandabilité
+Co = ctrb(A, B);
+rCo = rank(Co);
+
+if rCo == size(A, 1)
+    disp('Commandable');
+else
+    disp('Pas commandable.');
+end
+
+%% Découvrir F et G
+poly1 = [1, p1];
+poly2 = [1, 2*e*wn, wn^2];
+
+result_poly = conv(poly1, poly2);
+rts = roots(result_poly);
+
+F = place(A,B,rts);
+G = inv(-C*inv(A-B*F)*B);
+%% Réponse en fréquence en boucle fermée
+sysbf=ss(A-B*F,[B*G],C,0);
+sysubf=ss(A-B*F,[B*G],-F,G); 
+
+figure(1);
+bode(sysbf);
+title('Réponse en Fréquence en Boucle Fermée');
+
+% Mesure de la fréquence de coupure
+[mag, phase, wout] = bode(sysbf);
+[~, index_wc] = min(abs(mag - 1/sqrt(2)));
+wc = wout(index_wc);
+
+disp(['Fréquence de Coupure (wc) : ', num2str(wc), ' rad/s']);
+
+% Vérification du temps de montée
+trise_spec = 2.3/wc;
+trise_info = stepinfo(sysbf);
+trise_actuel = trise_info.RiseTime;
+
+disp(['Temps de Montée Spécifié (trise) : ', num2str(trise_spec), ' s']);
+disp(['Temps de Montée Actuel (trise) : ', num2str(trise_actuel), ' s']);
+
+if trise_actuel <= trise_spec
+    disp('Le temps de montée est conforme aux spécifications.');
+else
+    disp('Le temps de montée PAS conforme aux spécifications.');
+end
+
+%% Observateur
+
+L = place(A',C',rts)';
+
+Ao = (A - L*C);
+Bo = [B L];
+Co = eye(3);
+Do = zeros(3, 2);
+
+
+delta_v = 5;
+
+%% Integrateur
+
+Ae = [A zeros(3,1); -C 0];
+Be = [B; 0];
+Ce = [C 0];
+wn = 25;
+e = 10/wn;
+
+poly3 = [1, 2.1*wn, 3.4*wn^2, 2.7*wn^3, wn^4];
+r = roots(poly3);
+
+Fe = acker(Ae, Be, r);
+F = [Fe(1) Fe(2) Fe(3)];
+G = [Fe(4)];
+% 
+% Ai = [A-L*C-B*F B*G; 0 0];
+% B1 = [0 0 1]';
+% B2 = [L(1)' -1]';
+% Fi = [F -G];
+
+s = tf('s');
+Gs = C * inv(s * eye(size(A)) - A)*B;
+Kr_s = Gs - F * inv(s * eye(size(A)) - (A - B*F + L*C)) * B * Gs;
+Ky_s = F * inv(s * eye(size(A)) - (A - B*F + L*C)) * L;
+% Kr_s = -Fe * inv(s * eye(size(Ai)) - Ai)*B1
+
+S = 1 / 1 + Gs*Ky_s*Kr_s;
+T = Gs*Ky_s*Kr_s / 1 + Gs*Ky_s*Kr_s;
+SG = S*G;
+KS = Ky_s*Kr_s*S;
+
+figure(2);
+
+subplot(2, 2, 1);
+bode(S); 
+title('S');
+
+subplot(2, 2, 2);
+bode(T);
+title('T');
+
+subplot(2, 2, 3);
+bode(SG);
+title('SG');
+
+subplot(2, 2, 4);
+bode(KS);
+title('KS');
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
