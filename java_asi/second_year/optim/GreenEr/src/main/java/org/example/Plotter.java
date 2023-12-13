@@ -2,64 +2,109 @@ package org.example;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.time.*;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
+import java.util.TreeMap;
 
 public class Plotter {
-    private XYSeriesCollection dataset;
-    private JFreeChart chart;
-    private JFrame frame;
+    TreeMap<String, TimeSeries> timeSeriesContainer;
+    DataContainer dataContainer;
 
-    public Plotter() {
-        XYSeries series = new XYSeries("Empty Series");
-        dataset = new XYSeriesCollection(series);
-        chart = ChartFactory.createXYLineChart(
-                "Energy Consumption",
-                "",
-                "",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
-        );
-        ChartPanel chartPanel = new ChartPanel(chart);
+    public Plotter(DataContainer csvDataReader) throws IOException, ParseException {
+        this.dataContainer = csvDataReader;
+        this.timeSeriesContainer = new TreeMap<>();
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(chartPanel);
-
-        frame = new JFrame("Chart Frame");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(panel);
-
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public void updateSeries(Map<String, Double[]> plotData, Map<String, Date[]> plotDates) {
-        dataset.removeAllSeries();
-
-        for (Map.Entry<String, Double[]> entry : plotData.entrySet()) {
-            XYSeries series = new XYSeries(entry.getKey());
-            Double[] yData = entry.getValue();
-            Date[] xData = plotDates.get(entry.getKey());
-            System.out.println(xData);
-            for (int i = 0; i < yData.length; i++) {
-                series.add(xData[i].getTime(), yData[i]);
+        Date[] dates = dataContainer.getDates();
+        for (String availableVariable : dataContainer.getAvailableVariables()) {
+            TimeSeries timeserie = new TimeSeries(availableVariable);
+            for (int l = 0; l < dataContainer.getTimeStrings().length; l++) {
+                timeserie.add(new Hour(dates[l]), dataContainer.getData(availableVariable)[l]);
             }
-
-            dataset.addSeries(series);
+            timeSeriesContainer.put(availableVariable, timeserie);
         }
     }
 
-    public boolean isVisible() {
-        return frame.isVisible();
+    public void updateSeries(String[] variableNames, Date date1, Date date2, String option) throws ParseException {
+        TimeSeriesCollection seriesToPlot = new TimeSeriesCollection();
+        for (String variableName : variableNames) {
+            TimeSeries originalSeries = timeSeriesContainer.get(variableName);
+            TimeSeries filteredSeries = new TimeSeries(originalSeries.getKey());
+
+            switch (option) {
+                case "Month":
+                {   while (date1.before(date2)) {
+                    double monthlyAverage = calculateMonthlyAverage(originalSeries, date1);
+                    filteredSeries.add(new Month(date1), monthlyAverage);
+                    date1 = getNextMonth(date1);
+                }break;
+                }
+                case "Day":
+                {   while (date1.before(date2)) {
+                    double dailyAverage = calculateDailyAverage(originalSeries, date1);
+                    filteredSeries.add(new Day(date1), dailyAverage);
+                    date1 = getNextDay(date1);
+                }break;
+                }
+                default:
+                    for (int j = 0; j < originalSeries.getItemCount(); j++) {
+                        Hour hour = (Hour) originalSeries.getTimePeriod(j);
+
+                        if (hour.getStart().after(date1) && hour.getEnd().before(date2)) {
+                            filteredSeries.add(hour, originalSeries.getValue(j));
+                        }
+                    }break;
+            }
+            seriesToPlot.addSeries(filteredSeries);
+        }
+        JPanel panel = new ChartPanel(ChartFactory.createTimeSeriesChart("Energy consommation", "xlabel", "ylabel", seriesToPlot, true, true, false));
+        JFrame frame = new JFrame("projet");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(panel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    private double calculateDailyAverage(TimeSeries originalSeries, Date date) {
+        double total = 0;
+        int count = 0;
+
+        for (int j = 0; j < originalSeries.getItemCount(); j++) {
+            Hour hour = (Hour) originalSeries.getTimePeriod(j);
+            System.out.println(hour);
+            if (hour.getStart().getMonth() == date.getMonth() && hour.getStart().getYear() == date.getYear() && hour.getStart().getDay()==date.getDay()) {
+                total += originalSeries.getValue(j).doubleValue();
+                count++;
+            }
+        }
+        return (count > 0) ? total / count : 0;
+    }
+    private double calculateMonthlyAverage(TimeSeries originalSeries, Date date) {
+        double total = 0;
+        int count = 0;
+        for (int j = 0; j < originalSeries.getItemCount(); j++) {
+            Hour hour = (Hour) originalSeries.getTimePeriod(j);
+            if (hour.getStart().getMonth() == date.getMonth() && hour.getStart().getYear() == date.getYear()) {
+                total += originalSeries.getValue(j).doubleValue();
+                count++;
+            }
+        }
+        return (count > 0) ? total / count : 0.0;
+    }
+
+    private Date getNextMonth(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, 1);
+        return calendar.getTime();
+    }
+    private Date getNextDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        return calendar.getTime();
     }
 }
