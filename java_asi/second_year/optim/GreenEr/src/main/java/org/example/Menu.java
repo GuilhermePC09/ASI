@@ -1,118 +1,100 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
 package org.example;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Hashtable;
+import javax.swing.*;
 
-public class Menu extends JFrame {
-    private Plotter plotter;
-    private String[] checkboxItems;
-    private Hashtable<String, Double[]> plotData;
-    private Hashtable<String, Date[]> plotDates;
-    private JTextField dateTextFieldInitialDate;
-    private JTextField dateTextFieldFinalDate;
+public class Menu extends JFrame /*implements ActionListener*/ {
+    public DataContainer dataContainer;
+    private JCheckBox[] variableCheckBoxes;
+    private JRadioButton[] optionCheckBoxes;
+    private JTextField date;
+    private JTextField date2;
 
-    public Menu(DataContainer dataContainer) {
-        checkboxItems = dataContainer.getAvailableVariables();
-        plotData = new Hashtable<>();
-        plotDates = new Hashtable<>();
+    public Menu(DataContainer dataContainer) throws ParseException, IOException {
+        this.dataContainer = dataContainer;
+        initComponents();
+    }
 
-        createUI(dataContainer);
-        setSize(700, 400);
+    private void initComponents() throws IOException, ParseException {
+
+        String minDate = (dataContainer.getTimeStrings())[0];
+        String maxDate = (dataContainer.getTimeStrings())[dataContainer.getTimeStrings().length - 1];
+
+        setTitle("Projet Green");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setLocation(100, 100);
+        setSize(new Dimension(1300, 400));
+
+        Container contentPane = getContentPane();
+        GridBagLayout bagGrid = new GridBagLayout();
+        contentPane.setLayout(bagGrid);
+
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.insets = new Insets(10, 10, 10, 10);
+        JLabel label2 = new JLabel(" Is the date bellow between " + minDate + " and " + maxDate + " ?");
+        JLabel label3 = new JLabel(" Initial date (format: yyyy-mm-dd HH:mm)");
+        JLabel label4 = new JLabel("Final date (format: yyyy-mm-dd HH:mm)");
+        c.gridx = 1;
+        contentPane.add(label2, c);
+        c.gridx = 1;
+        c.gridy = 1;
+        contentPane.add(label3, c);
+        c.gridx = 2;
+        c.gridy = 1;
+        contentPane.add(label4, c);
+        date = new JTextField();
+        c.gridx = 1;
+        c.gridy = 2;
+        c.ipadx = 150;
+        contentPane.add(date, c);
+        date2 = new JTextField();
+        c.gridx = 2;
+        c.gridy = 2;
+        c.ipadx = 150;
+        contentPane.add(date2, c);
+        JButton button = new JButton("Plot");
+        c.gridx = 1;
+        c.gridy = 3;
+        contentPane.add(button, c);
+        JPanel pbox = new JPanel();
+        pbox.setLayout(new BoxLayout(pbox, BoxLayout.Y_AXIS));
+        this.variableCheckBoxes = new JCheckBox[dataContainer.getNumberOfVariables()];
+        for (int i = 0; i < dataContainer.getNumberOfVariables(); i++) {
+            this.variableCheckBoxes[i] = new JCheckBox(dataContainer.getAvailableVariables()[i]);
+            pbox.add(this.variableCheckBoxes[i]);
+        }
+        c.gridx = 0;
+        c.gridy = 1;
+        contentPane.add(pbox, c);
+        String[] timeIntervals = {"Day", "Hour", "Month"};
+        JPanel DHM = new JPanel();
+        DHM.setLayout(new BoxLayout(DHM, BoxLayout.Y_AXIS));
+        ButtonGroup optionButtonGroup = new ButtonGroup();
+        this.optionCheckBoxes = new JRadioButton[timeIntervals.length];
+        for (int i = 0; i < timeIntervals.length; i++) {
+            this.optionCheckBoxes[i] = new JRadioButton(timeIntervals[i]);
+            optionButtonGroup.add(this.optionCheckBoxes[i]);
+            DHM.add(this.optionCheckBoxes[i]);
+        }
+        this.optionCheckBoxes[1].setSelected(true);
+        c.gridx = 3;
+        c.gridy = 1;
+        contentPane.add(DHM, c);
+        button.addActionListener(new PlotProcessor(this.dataContainer,minDate, maxDate, date,date2,optionCheckBoxes,variableCheckBoxes));
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
-
-    private void createUI(DataContainer dataContainer) {
-        JPanel panelMain = new JPanel();
-        JPanel panelSup = new JPanel();
-        JPanel panelInf = new JPanel();
-        JPanel panelTex1 = new JPanel(new GridLayout(4, 1));
-        JPanel panelTex2 = new JPanel(new GridLayout(4, 1));
-        JPanel panelCheck = new JPanel(new GridLayout(4, 1));
-
-        panelMain.setLayout(new GridLayout(2, 1));
-
-        panelSup.setLayout(new BorderLayout());
-
-        panelMain.add(panelSup);
-        panelMain.add(panelInf);
-
-        for (String item : checkboxItems) {
-            JCheckBox checkBox = new JCheckBox(item);
-            checkBox.addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        System.out.println(item + " is checked");
-                        plotData.put(item, dataContainer.getData(item));
-                        try {
-                            plotDates.put(item, dataContainer.getDates());
-                        } catch (ParseException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    } else {
-                        System.out.println(item + " is unchecked");
-                        plotData.remove(item);
-                        plotDates.remove(item);
-                    }
-                }
-            });
-            panelCheck.add(checkBox);
-        }
-        panelSup.add(panelCheck, BorderLayout.WEST);
-
-        panelTex1.add(new JLabel("Please indicate the dates you wish to view:"));
-        panelTex1.add(new JLabel("Please indicate the dates you wish to view:"));
-        panelTex1.add(new JLabel("2022-09-01 00:00 and 2023-08-31 23:00"));
-
-        panelTex1.add(new JLabel("Initial date (format : mm-dd-yyyy HH:mm)"));
-        dateTextFieldInitialDate = new JTextField(20);
-        panelTex1.add(dateTextFieldInitialDate);
-
-        panelSup.add(panelTex1, BorderLayout.CENTER);
-
-        panelTex1.add(new JLabel(""));
-        panelTex1.add(new JLabel(""));
-        panelTex2.add(new JLabel("Final date (format : mm-dd-yyyy HH:mm)"));
-        dateTextFieldFinalDate = new JTextField(20);
-        panelTex2.add(dateTextFieldFinalDate);
-
-        panelSup.add(panelTex2, BorderLayout.EAST);
-
-        JButton plotButton = new JButton("Plot");
-        plotButton.addActionListener(e -> {
-            if (plotter == null || !plotter.isVisible()) {
-                plotter = new Plotter();
-            }
-
-            String initialDate = dateTextFieldInitialDate.getText();
-            String finalDate = dateTextFieldFinalDate.getText();
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm");
-
-            try {
-                Date startDate = dateFormat.parse(initialDate);
-                Date endDate = dateFormat.parse(finalDate);
-
-                plotDates.put("UserSelectedStartDate", new Date[]{startDate});
-                plotDates.put("UserSelectedEndDate", new Date[]{endDate});
-            } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(Menu.this, "Invalid date format. Please use MM-dd-yyyy HH:mm");
-            }
-
-            plotter.updateSeries(plotData, plotDates);
-        });
-
-        panelInf.add(plotButton);
-
-        add(panelMain);
-    }
 }
-
-
