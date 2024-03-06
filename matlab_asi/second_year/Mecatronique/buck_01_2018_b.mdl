@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.1"
+    ComputedModelVersion    "1.2"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -205,9 +205,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "piffercg"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 13 17:30:41 2023"
-  RTWModifiedTimeStamp	  621797229
-  ModelVersionFormat	  "1.%<AutoIncrement:1>"
+  LastModifiedDate	  "Mon Nov 20 14:14:16 2023"
+  RTWModifiedTimeStamp	  622390447
+  ModelVersionFormat	  "1.%<AutoIncrement:2>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -1227,21 +1227,21 @@ Model {
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLogging',true,'DataLoggingVariableName','current_L','DataLoggingSaveFormat','S"
       "tructureWithTime','DataLoggingDecimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Ti"
-      "me Domain',true,'SerializedDisplays',{struct('MinYLimReal','-2.87368','MaxYLimReal','8.58679','YLabelReal','','M"
-      "inYLimMag','0.00000','MaxYLimMag','8.58679','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',fa"
-      "lse,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 "
-      "1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.3921568627450"
-      "98 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098"
-      "039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},"
-      "'NumLines',1,'LineNames',{{'Current Measurement'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',"
-      "struct('MinYLimReal','-2.87368','MaxYLimReal','8.58679','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','8.5"
-      "8679','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor"
-      "',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.074509803921568"
-      "6 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.074509803921568"
-      "6;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','"
-      "%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'ShowC"
-      "ontent',true,'Placement',1)),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools','"
-      "Measurements',true,'Version','2018b')),'Version','2018b','Location',[188 390 512 629])"
+      "me Domain',true,'SerializedDisplays',{struct('MinYLimReal','-1.1354','MaxYLimReal','10.21864','YLabelReal','','M"
+      "inYLimMag','0.00000','MaxYLimMag','10.21864','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',f"
+      "alse,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1"
+      " 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745"
+      "098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074509"
+      "8039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}}"
+      ",'NumLines',1,'LineNames',{{'Current Measurement'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults'"
+      ",struct('MinYLimReal','-1.1354','MaxYLimReal','10.21864','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','10"
+      ".21864','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickCol"
+      "or',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215"
+      "686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215"
+      "686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title'"
+      ",'%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'Sho"
+      "wContent',true,'Placement',1)),extmgr.Configuration('Tools','Plot Navigation',true),extmgr.Configuration('Tools'"
+      ",'Measurements',true,'Version','2018b')),'Version','2018b','Location',[430 209 1482 752])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -1270,7 +1270,7 @@ Model {
       "686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title'"
       ",'%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'Sho"
       "wContent',true,'Placement',1)),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',false),extmgr.Co"
-      "nfiguration('Tools','Measurements',true,'Version','2018b')),'Version','2018b','Location',[824 442 1734 917])"
+      "nfiguration('Tools','Measurements',true,'Version','2018b')),'Version','2018b','Location',[403 392 1313 867])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -1491,7 +1491,7 @@ Model {
       LConnTagsString	      "__new0"
       RConnTagsString	      "__new0"
       BranchType	      "R"
-      Resistance	      "R*5"
+      Resistance	      "R*3"
       Inductance	      "L"
       SetiL0		      off
       InitialCurrent	      "0"
@@ -1508,7 +1508,7 @@ Model {
       ZOrder		      4
       Time		      "1e-4"
       Before		      "Ve"
-      After		      "Ve+1"
+      After		      "Ve"
       SampleTime	      "0"
     }
     Block {
@@ -1621,6 +1621,7 @@ Model {
       Position		      [1225, 365, 1255, 395]
       ZOrder		      1082
       Time		      "2e-4"
+      After		      "5"
       SampleTime	      "0"
     }
     Block {

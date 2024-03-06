@@ -1,0 +1,264 @@
+******************************************************************************
+              TMS320C55x Linker PC v4.4.1                      
+******************************************************************************
+>> Linked Mon Mar 04 12:36:51 2024
+
+OUTPUT FILE NAME:   <Projet_BE_DSP_1.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 0000245c
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+                        (bytes)   (bytes)    (bytes)   (bytes)
+----------------------  --------  ---------  --------  --------  ----  --------
+  MMR                   00000000   000000c0  00000000  000000c0  RWIX
+  DARAM0                000000c0   00001f40  0000052a  00001a16  RWIX
+  DARAM1                00002000   00002000  00000530  00001ad0  RWIX
+  DARAM2                00004000   00002000  00000000  00002000  RWIX
+  DARAM3                00006000   00002000  00000000  00002000  RWIX
+  DARAM4                00008000   00002000  00000000  00002000  RWIX
+  DARAM5                0000a000   00002000  00000010  00001ff0  RWIX
+  DARAM6                0000c000   00002000  00000000  00002000  RWIX
+  DARAM7                0000e000   00002000  00000000  00002000  RWIX
+  SARAM0                00010000   00002000  00000000  00002000  RWIX
+  SARAM1                00012000   00002000  00000000  00002000  RWIX
+  SARAM2                00014000   00002000  00000000  00002000  RWIX
+  SARAM3                00016000   00002000  00000000  00002000  RWIX
+  SARAM4                00018000   00002000  00000000  00002000  RWIX
+  SARAM5                0001a000   00002000  00000000  00002000  RWIX
+  SARAM6                0001c000   00002000  00000000  00002000  RWIX
+  SARAM7                0001e000   00002000  00000000  00002000  RWIX
+  SARAM8                00020000   00002000  00000000  00002000  RWIX
+  SARAM9                00022000   00002000  00000000  00002000  RWIX
+  SARAM10               00024000   00002000  00000000  00002000  RWIX
+  SARAM11               00026000   00002000  00000000  00002000  RWIX
+  SARAM12               00028000   00002000  00000000  00002000  RWIX
+  SARAM13               0002a000   00002000  00000000  00002000  RWIX
+  SARAM14               0002c000   00002000  00000000  00002000  RWIX
+  SARAM15               0002e000   00002000  00000000  00002000  RWIX
+  SARAM16               00030000   00002000  00000000  00002000  RWIX
+  SARAM17               00032000   00002000  00000000  00002000  RWIX
+  SARAM18               00034000   00002000  00000000  00002000  RWIX
+  SARAM19               00036000   00002000  00000000  00002000  RWIX
+  SARAM20               00038000   00002000  00000000  00002000  RWIX
+  SARAM21               0003a000   00002000  00000000  00002000  RWIX
+  SARAM22               0003c000   00002000  00000000  00002000  RWIX
+  SARAM23               0003e000   00002000  00000000  00002000  RWIX
+  SARAM24               00040000   00002000  00000000  00002000  RWIX
+  SARAM25               00042000   00002000  00000000  00002000  RWIX
+  SARAM26               00044000   00002000  00000000  00002000  RWIX
+  SARAM27               00046000   00002000  00000000  00002000  RWIX
+  SARAM28               00048000   00002000  00000000  00002000  RWIX
+  SARAM29               0004a000   00002000  00000000  00002000  RWIX
+  SARAM30               0004c000   00002000  00000000  00002000  RWIX
+  SARAM31               0004e000   00002000  00000000  00002000  RWIX
+  CS0                   00050000   007b0000  00000000  007b0000  RWIX
+  CS2                   00800000   00400000  00000000  00400000  RWIX
+  CS3                   00c00000   00200000  00000000  00200000  RWIX
+  CS4                   00e00000   00100000  00000000  00100000  RWIX
+  CS5                   00f00000   000e0000  00000000  000e0000  RWIX
+  ROM                   00fe0000   0001ff00  00000000  0001ff00  RWIX
+  VECS                  00ffff00   00000100  00000100  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+(Addresses surrounded by []'s are displayed for convenience only!)
+
+output                                                          attributes/
+section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
+--------  ----  ----------- ----------- ---------- ----------   --------------
+.stack       0   [ 000000c0 ]  00000060          *   00000100   UNINITIALIZED
+                 [ 000000c0 ]  00000060          *   00000100   --HOLE--
+
+.sysstack 
+*            0   [ 000002c0 ]  00000160          *   00000100   UNINITIALIZED
+                 [ 000002c0 ]  00000160          *   00000100   --HOLE--
+
+.cinit       0   [ 000004c0 ]  00000260          *   00000015   
+                 [ 000004c0 ]  00000260          *   0000000a   rts55x.lib : _lock.obj (.cinit)
+                 [ 000004d4 ]  0000026a          *   0000000a              : exit.obj (.cinit)
+                 [ 000004e8 ]  00000274          *   00000001   --HOLE-- [fill = 0]
+
+ma_zone_de_code_pour_ma_table_de_vecteurs 
+*            0     00000500  [ 00000280 ] 00000100          *   
+                   00000500  [ 00000280 ] 00000100          *   installation_vecteurs.obj (ma_zone_de_code_pour_ma_table_de_vecteurs)
+
+.text        0     00002000  [ 00001000 ] 00000530          *   
+                   00002000  [ 00001000 ] 000000ac          *   libVercors.lib : configuration_TIMER_0.obj (.text)
+                   000020ac  [ 00001056 ] 000000a1          *   rts55x.lib : divul.obj (.text)
+                   0000214d  [ 000010a6+] 00000070          *   driver_io.obj (.text)
+                   000021bd  [ 000010de+] 0000006a          *   libVercors.lib : raccordement_broches.obj (.text)
+                   00002227  [ 00001113+] 00000062          *                  : CNA.obj (.text)
+                   00002289  [ 00001144+] 0000004d          *   rts55x.lib : autoinit.obj (.text)
+                   000022d6  [ 0000116b ] 0000004b          *              : args_main.obj (.text)
+                   00002321  [ 00001190+] 00000048          *              : divli.obj (.text)
+                   00002369  [ 000011b4+] 00000042          *   libVercors.lib : configuration_UART.obj (.text)
+                   000023ab  [ 000011d5+] 0000003e          *   rts55x.lib : exit.obj (.text)
+                   000023e9  [ 000011f4+] 0000003a          *   libVercors.lib : initialisation_interruptions.obj (.text)
+                   00002423  [ 00001211+] 00000039          *   programme_principal.obj (.text)
+                   0000245c  [ 0000122e ] 00000034          *   rts55x.lib : boot.obj (.text)
+                   00002490  [ 00001248 ] 00000028          *   libVercors.lib : configuration_entrees_sorties.obj (.text)
+                   000024b8  [ 0000125c ] 00000028          *                  : initialisation_dsp.obj (.text)
+                   000024e0  [ 00001270 ] 0000001f          *                  : configuration_SAR_ADC.obj (.text)
+                   000024ff  [ 0000127f+] 00000013          *   rts55x.lib : lmpy.obj (.text)
+                   00002512  [ 00001289 ] 00000012          *              : _lock.obj (.text)
+                   00002524  [ 00001292 ] 00000007          *              : exit.obj (.text:CIO_breakpoint)
+                   0000252b  [ 00001295+] 00000002          *   installation_vecteurs.obj (.text)
+                   0000252d  [ 00001296+] 00000002          *   rts55x.lib : vectors.obj (.text)
+                   0000252f  [ 00001297 ] 00000001          *   --HOLE-- [fill = 20]
+
+.data        0   [ 00008000 ]  00004000          *   00000000   UNINITIALIZED
+
+.bss         0   [ 0000a000 ]  00005000          *   00000008   UNINITIALIZED
+                 [ 0000a000 ]  00005000          *   00000004   rts55x.lib : _lock.obj (.bss)
+                 [ 0000a008 ]  00005004          *   00000004              : exit.obj (.bss)
+
+vectors      0     00ffff00  [ 007fff80 ] 00000100          *   NOLOAD SECTION
+                   00ffff00  [ 007fff80 ] 00000100          *   rts55x.lib : vectors.obj (vectors)
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000002                $TI_capability$C5500$CallingConvention
+00000002                $TI_capability$C5500$MemoryModel
+00000001                $TI_capability_requires_rev3
+            00005000    .bss
+            00004000    .data
+00002000                .text
+00002525                C$$EXIT
+000024ff                I$$LMPY
+00ffff00                _Reset
+            00000160    __STACK_END
+00000200                __STACK_SIZE
+00000200                __SYSSTACK_SIZE
+00000001                __TI_args_main
+ffffffff                ___binit__
+            00005000    ___bss__
+ffffffff                ___c_args__
+            00000260    ___cinit__
+            00004000    ___data__
+            00004000    ___edata__
+            00005008    ___end__
+00002530                ___etext__
+ffffffff                ___pinit__
+00002000                ___text__
+000022d6                __args_main
+            00005004    __cleanup_ptr
+00002321                __divli
+000020ac                __divul
+            00005006    __dtors_ptr
+            00005000    __lock
+000024ff                __mpyli
+00002522                __nop
+0000251a                __register_lock
+00002512                __register_unlock
+            00000060    __stack
+            00000160    __sysstack
+            00005002    __unlock
+00002524                _abort
+00002184                _allumer_led
+00002289                _auto_init
+0000245c                _c_int00
+00002369                _configuration_de_l_UART
+00002490                _configuration_des_entrees_sorties_TOR
+000024e0                _configuration_du_CAN
+00002000                _configuration_du_TIMER_0
+000021ae                _est_bouton_appuye
+00002195                _eteindre_led
+000023ab                _exit
+00002162                _fermer_contacteur
+00002262                _initialisation_CNA_AD7391A
+000023e9                _initialisation_des_interruptions
+000024b8                _initialisation_dsp
+000021a6                _inverser_led
+00000500                _l_adresse_de_debut_de_ma_table_des_vecteurs_d_interruption
+00002423                _main
+0000214d                _modify_bit_in_address
+00002173                _ouvrir_contacteur
+000021bd                _raccordement_des_peripheriques_aux_broches_du_DSP
+00002227                _sortie_sur_le_CNA_AD7391A
+ffffffff                binit
+            00000260    cinit
+            00004000    edata
+            00005008    end
+00002530                etext
+0000252b                no_isr
+ffffffff                pinit
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+abs. value/
+byte addr   word addr   name
+---------   ---------   ----
+00000001                $TI_capability_requires_rev3
+00000001                __TI_args_main
+00000002                $TI_capability$C5500$CallingConvention
+00000002                $TI_capability$C5500$MemoryModel
+            00000060    __stack
+00000200                __STACK_SIZE
+00000200                __SYSSTACK_SIZE
+            00000160    __STACK_END
+            00000160    __sysstack
+            00000260    ___cinit__
+            00000260    cinit
+00000500                _l_adresse_de_debut_de_ma_table_des_vecteurs_d_interruption
+00002000                .text
+00002000                ___text__
+00002000                _configuration_du_TIMER_0
+000020ac                __divul
+0000214d                _modify_bit_in_address
+00002162                _fermer_contacteur
+00002173                _ouvrir_contacteur
+00002184                _allumer_led
+00002195                _eteindre_led
+000021a6                _inverser_led
+000021ae                _est_bouton_appuye
+000021bd                _raccordement_des_peripheriques_aux_broches_du_DSP
+00002227                _sortie_sur_le_CNA_AD7391A
+00002262                _initialisation_CNA_AD7391A
+00002289                _auto_init
+000022d6                __args_main
+00002321                __divli
+00002369                _configuration_de_l_UART
+000023ab                _exit
+000023e9                _initialisation_des_interruptions
+00002423                _main
+0000245c                _c_int00
+00002490                _configuration_des_entrees_sorties_TOR
+000024b8                _initialisation_dsp
+000024e0                _configuration_du_CAN
+000024ff                I$$LMPY
+000024ff                __mpyli
+00002512                __register_unlock
+0000251a                __register_lock
+00002522                __nop
+00002524                _abort
+00002525                C$$EXIT
+0000252b                no_isr
+00002530                ___etext__
+00002530                etext
+            00004000    .data
+            00004000    ___data__
+            00004000    ___edata__
+            00004000    edata
+            00005000    .bss
+            00005000    ___bss__
+            00005000    __lock
+            00005002    __unlock
+            00005004    __cleanup_ptr
+            00005006    __dtors_ptr
+            00005008    ___end__
+            00005008    end
+00ffff00                _Reset
+ffffffff                ___binit__
+ffffffff                ___c_args__
+ffffffff                ___pinit__
+ffffffff                binit
+ffffffff                pinit
+
+[65 symbols]

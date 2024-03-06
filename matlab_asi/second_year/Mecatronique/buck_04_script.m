@@ -48,6 +48,8 @@ grid on
 [a1,b1,c1,d1] = linmod('buck_04_2018_b',xFinal,0);
 [num1,den1] = ss2tf(a1,b1,c1,d1);
 H1 = tf(num1,den1);
+disp("Poles H1")
+damp(H1)
 
 w=logspace(2,6,1000); % vecteur pulsation
 
@@ -66,8 +68,13 @@ num_cor = [Kp*Ti Kp];
 den_cor = [Ti 0];
 
 Hcor = tf(num_cor, den_cor);
+disp("Poles Hcor")
+pole(Hcor)
 
 FTBO = Hcor * H1;
+
+disp("Poles FTBO")
+pole(FTBO)
 
 figure(3)
 bode(FTBO,w);

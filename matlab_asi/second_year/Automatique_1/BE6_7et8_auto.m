@@ -76,16 +76,12 @@ end
 
 %% Observateur
 
-L = place(A',C',rts)';
+L = place(A',C',rts)'; % rts = roots
 
 Ao = (A - L*C);
 Bo = [B L];
 Co = eye(3);
 Do = zeros(3, 2);
-
-
-delta_v = 5;
-
 %% Integrateur
 
 Ae = [A zeros(3,1); -C 0];
