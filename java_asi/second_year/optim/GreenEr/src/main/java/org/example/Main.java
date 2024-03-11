@@ -8,10 +8,9 @@ public class Main {
         DataContainer dataContainer = null;
         try {
             dataContainer = new DataContainer("GreenEr_data.csv");
-            Difference dif = new Difference(dataContainer) ;
-            dataContainer.addData("Difference_Consumption_production_kW", dif.dif() ) ;
-            Autonomously per= new Autonomously(dataContainer) ;
-            dataContainer.addData("Operating_Energy_autonomously_percentage ", per.per() ) ;
+            DataProcessor dataPro = new DataProcessor(dataContainer) ;
+            dataContainer.addData("Difference_Consumption_production_kW", dataPro.dif() ) ;
+            dataContainer.addData("Operating_Energy_autonomously_percentage ", dataPro.per() ) ;
         } catch (IOException e) {
             e.printStackTrace();
         }

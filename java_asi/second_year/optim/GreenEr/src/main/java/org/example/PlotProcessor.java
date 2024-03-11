@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.example;
 
 import java.awt.event.ActionEvent;
@@ -45,7 +41,7 @@ public class PlotProcessor implements ActionListener{
             Date dateinit = format.parse(this.dateinit.getText());
             Date dateend = format.parse(this.dateend.getText());
             if ((dateinit.after(min) || dateinit.equals(min)) && (dateend.before(max)|| dateend.equals(max))) {
-                System.out.println( " YES!! the indicated date is included between the two dates");
+                System.out.println( "success");
                 ArrayList<String> variableToKeep = new ArrayList();
                 String option=null;
                 for (JRadioButton optionCheckBoxe : optionCheckBoxes) {
@@ -61,11 +57,11 @@ public class PlotProcessor implements ActionListener{
                 }
                 plotFactory.updateSeries(variableToKeep.toArray(new String[0]),dateinit,dateend,option);
             } else{
-                System.err.println( " NO!! the indicated date is not included between the two dates");
+                System.err.println( "invalid date range");
             }
 
         } catch (ParseException ex) {
-            System.err.println(" Date format ERROR!! Could you re-enter the date in the correct format? ");
+            System.err.println("invalid date format");
         }
 
     }
