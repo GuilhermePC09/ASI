@@ -4,17 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2ab9f62-ea2d-4181-9eb8-5dba819c2f3d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Autonomously.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Difference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/PlotProcessor.java" afterDir="false" />
+    <list default="true" id="e2ab9f62-ea2d-4181-9eb8-5dba819c2f3d" name="Changes" comment="Basic Java Green Project(need improvement)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DataProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Autonomously.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Difference.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PlotProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PlotProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Plotter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Plotter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese_simu2.slx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese_simu2.slx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE2_auto.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE3_auto.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE3_auto.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE4et5.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE4et5simu.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE6_7et8_auto.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE6_7et8_auto.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE6_7et8_auto_simu.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE6_7et8_obser_auto_simu.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE6_7et8_obser_auto_simu.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese_simu1.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese_simu2.slx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/BE_synthese_simu2.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/discret.slxc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/fonctpendule.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/html/BE6_7et8_auto.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/html/BE6_7et8_auto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/html/BE6_7et8_auto_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/html/BE6_7et8_auto_02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_auto/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_auto/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_auto/varInfo.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_obser_auto/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_obser_auto/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_obser_auto/varInfo.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_obser_auto_simu/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_obser_auto_simu/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE6_7et8_obser_auto_simu/varInfo.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE_synthese_simu2/checksumOfCache.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE_synthese_simu2/tmwinternal/simulink_cache.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../matlab_asi/second_year/Automatique_1/slprj/sim/varcache/BE_synthese_simu2/varInfo.mat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +73,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
@@ -79,6 +113,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_392-corretto-1.8.0_392-f644763e9732-9fbf141a" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -89,12 +130,28 @@
       <updated>1701876183277</updated>
       <workItem from="1701876184427" duration="4288000" />
       <workItem from="1701943145324" duration="48000" />
-      <workItem from="1702471258644" duration="9539000" />
+      <workItem from="1702471258644" duration="10937000" />
+      <workItem from="1704833358421" duration="442000" />
+      <workItem from="1704833845575" duration="145000" />
+      <workItem from="1704890428916" duration="5962000" />
     </task>
+    <task id="LOCAL-00001" summary="Basic Java Green Project(need improvement)">
+      <option name="closed" value="true" />
+      <created>1702482183549</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702482183549</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Basic Java Green Project(need improvement)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Java Green Project(need improvement)" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

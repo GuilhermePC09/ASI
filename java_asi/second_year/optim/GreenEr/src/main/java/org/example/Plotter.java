@@ -5,7 +5,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.data.time.*;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +14,7 @@ public class Plotter {
     TreeMap<String, TimeSeries> timeSeriesContainer;
     DataContainer dataContainer;
 
-    public Plotter(DataContainer csvDataReader) throws IOException, ParseException {
+    public Plotter(DataContainer csvDataReader) throws ParseException {
         this.dataContainer = csvDataReader;
         this.timeSeriesContainer = new TreeMap<>();
 
@@ -62,7 +61,7 @@ public class Plotter {
             seriesToPlot.addSeries(filteredSeries);
         }
         JPanel panel = new ChartPanel(ChartFactory.createTimeSeriesChart("Energy consommation", "xlabel", "ylabel", seriesToPlot, true, true, false));
-        JFrame frame = new JFrame("projet");
+        JFrame frame = new JFrame("plot");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(panel);
         frame.pack();
