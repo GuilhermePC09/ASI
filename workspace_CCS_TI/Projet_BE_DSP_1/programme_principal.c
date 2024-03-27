@@ -10,8 +10,12 @@
 void main (void) {
     initialisation_dsp();
 
-
     while(1) {
+    	inverser_led();
+    }
+
+// other codes
+/*
     	long int i = 0;
         int bouton_appuye = est_bouton_appuye();
 
@@ -26,7 +30,7 @@ void main (void) {
         for(i = 0; i < 3500000; i++){
 
         }
-    }
+*/
 
 // Avec l'optimization à 3 nous avons une vitesse plus rapide, parce que il n'utilise pas le for;
 /*

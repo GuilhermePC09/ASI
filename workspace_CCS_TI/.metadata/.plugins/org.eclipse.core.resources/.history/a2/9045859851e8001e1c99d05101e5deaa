@@ -1,0 +1,17 @@
+#include <libvercors.h>
+
+#define IER_0	0x00
+#define INTER_AUTH	(*((int*) IER_0))
+
+
+void autoriser_interruption_timer (void) {
+	INTER_AUTH |= (1 << 4);
+}
+
+void ecouter_les_interruptions (void) {
+	asm(" BCLR INTM");
+}
+
+interrupt void  isr_timer (void) {
+
+}

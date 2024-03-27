@@ -1,0 +1,53 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+../C5515.cmd 
+
+ASM_SRCS += \
+../installation_vecteurs.asm 
+
+C_SRCS += \
+../driver_io.c \
+../interruption_main.c \
+../programme_principal.c 
+
+OBJS += \
+./driver_io.obj \
+./installation_vecteurs.obj \
+./interruption_main.obj \
+./programme_principal.obj 
+
+ASM_DEPS += \
+./installation_vecteurs.pp 
+
+C_DEPS += \
+./driver_io.pp \
+./interruption_main.pp \
+./programme_principal.pp 
+
+C_DEPS__QUOTED += \
+"driver_io.pp" \
+"interruption_main.pp" \
+"programme_principal.pp" 
+
+OBJS__QUOTED += \
+"driver_io.obj" \
+"installation_vecteurs.obj" \
+"interruption_main.obj" \
+"programme_principal.obj" 
+
+ASM_DEPS__QUOTED += \
+"installation_vecteurs.pp" 
+
+C_SRCS__QUOTED += \
+"../driver_io.c" \
+"../interruption_main.c" \
+"../programme_principal.c" 
+
+ASM_SRCS__QUOTED += \
+"../installation_vecteurs.asm" 
+
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Projet_BE_DSP_2/driver_io.h&apos; to &apos;interruptions.h&apos;" description="Rename resource &apos;driver_io.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="driver_io.h" name="interruptions.h" stamp="1710759433436" updateReferences="true"/>
+</session>

@@ -31,6 +31,18 @@ void inverser_led (void){
 	P_OUT ^= (1 << 0);
 }
 
+void inverser_led_pause (void){
+	long int i = 0;
+
+	P_OUT ^= (1 << 0);
+	for(i = 0; i < 3500000; i++){}
+}
+
+void impulsion_maintenant (void){
+	P_OUT |= (1 << 10);
+	P_OUT &= ~(1 << 10);
+}
+
 
 int est_bouton_appuye(void){
     if((P_IN & (1 << 2)) != 0){

@@ -1,0 +1,53 @@
+#include <libvercors.h>
+
+#define IER_0	0x00
+#define SARCTRL 0x7012
+#define SARCTR_RES 	(*((ioport int*) 0x1C14))
+#define INTER_AUTH	(*((int*) IER_0))
+#define TIMER_FLAG 	(*((ioport int*) 0x1C14))
+#define POINT_TEST	(*((ioport int*) 0x1C0A))
+
+
+void autoriser_interruption_timer (void) {
+	INTER_AUTH |= (1 << 4);
+}
+
+void autoriser_interruption_can (void) {
+	INTER_AUTH |= (1 << 13);
+}
+
+void declencher_echantillonnage_can (void) {
+	SARCTR_RES |= (1 << 15);
+	SARCTR_RES &= ~(1 << 11);
+	SARCTR_RES |= (1 << 10);
+}
+
+void ecouter_les_interruptions (void) {
+	asm(" BCLR INTM");
+}
+
+void inverse(int pin) {
+    int addr = 0x1C0A;
+    int data = (*((ioport int*) addr));
+    int mask = (1 << pin);
+    int bit = (data >> pin) & 1;
+
+    if (bit == 0) {
+        data |= mask;
+    } else {
+        data &= ~mask;
+    }
+    *((ioport int*) addr) = data;
+}
+
+interrupt void  isr_timer (void) {
+	TIMER_FLAG |= (1 << 0);
+//	POINT_TEST ^= (1 << 9);
+//	POINT_TEST |= (1 << 9);
+//	POINT_TEST &= ~(1 << 9);
+//	inverse(9);
+}
+
+interrupt void isr_can (void) {
+
+}

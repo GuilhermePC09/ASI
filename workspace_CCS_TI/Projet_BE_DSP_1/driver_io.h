@@ -22,4 +22,8 @@ void inverser_led(void);
 
 int est_bouton_appuye(void);
 
+void impulsion_maintenant (void);
+
+void inverser_led_pause (void);
+
 #endif

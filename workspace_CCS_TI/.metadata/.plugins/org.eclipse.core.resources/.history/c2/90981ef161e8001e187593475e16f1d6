@@ -1,0 +1,19 @@
+/**********************************************/
+/* Auteur de la version initiale : E. Escande */
+/* modification : Equipe pédagogique ENSE3    */
+/**********************************************/
+
+#include <libvercors.h>
+#include "interruptions.h"
+
+void main (void) {
+	initialisation_dsp();
+
+	autoriser_interruption_timer();
+	ecouter_les_interruptions();
+
+	while (1) {
+		POINT_TEST |= (1 << 10);
+		POINT_TEST &= ~(1 << 10);
+	}
+}

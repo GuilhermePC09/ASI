@@ -1,10 +1,10 @@
 ******************************************************************************
               TMS320C55x Linker PC v4.4.1                      
 ******************************************************************************
->> Linked Mon Mar 04 12:36:51 2024
+>> Linked Fri Mar 22 16:35:43 2024
 
 OUTPUT FILE NAME:   <Projet_BE_DSP_1.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 0000245c
+ENTRY POINT SYMBOL: "_c_int00"  address: 00002450
 
 
 MEMORY CONFIGURATION
@@ -87,23 +87,23 @@ ma_zone_de_code_pour_ma_table_de_vecteurs
 .text        0     00002000  [ 00001000 ] 00000530          *   
                    00002000  [ 00001000 ] 000000ac          *   libVercors.lib : configuration_TIMER_0.obj (.text)
                    000020ac  [ 00001056 ] 000000a1          *   rts55x.lib : divul.obj (.text)
-                   0000214d  [ 000010a6+] 00000070          *   driver_io.obj (.text)
-                   000021bd  [ 000010de+] 0000006a          *   libVercors.lib : raccordement_broches.obj (.text)
-                   00002227  [ 00001113+] 00000062          *                  : CNA.obj (.text)
-                   00002289  [ 00001144+] 0000004d          *   rts55x.lib : autoinit.obj (.text)
-                   000022d6  [ 0000116b ] 0000004b          *              : args_main.obj (.text)
-                   00002321  [ 00001190+] 00000048          *              : divli.obj (.text)
-                   00002369  [ 000011b4+] 00000042          *   libVercors.lib : configuration_UART.obj (.text)
-                   000023ab  [ 000011d5+] 0000003e          *   rts55x.lib : exit.obj (.text)
-                   000023e9  [ 000011f4+] 0000003a          *   libVercors.lib : initialisation_interruptions.obj (.text)
-                   00002423  [ 00001211+] 00000039          *   programme_principal.obj (.text)
-                   0000245c  [ 0000122e ] 00000034          *   rts55x.lib : boot.obj (.text)
-                   00002490  [ 00001248 ] 00000028          *   libVercors.lib : configuration_entrees_sorties.obj (.text)
-                   000024b8  [ 0000125c ] 00000028          *                  : initialisation_dsp.obj (.text)
-                   000024e0  [ 00001270 ] 0000001f          *                  : configuration_SAR_ADC.obj (.text)
-                   000024ff  [ 0000127f+] 00000013          *   rts55x.lib : lmpy.obj (.text)
-                   00002512  [ 00001289 ] 00000012          *              : _lock.obj (.text)
-                   00002524  [ 00001292 ] 00000007          *              : exit.obj (.text:CIO_breakpoint)
+                   0000214d  [ 000010a6+] 0000009d          *   driver_io.obj (.text)
+                   000021ea  [ 000010f5 ] 0000006a          *   libVercors.lib : raccordement_broches.obj (.text)
+                   00002254  [ 0000112a ] 00000062          *                  : CNA.obj (.text)
+                   000022b6  [ 0000115b ] 0000004d          *   rts55x.lib : autoinit.obj (.text)
+                   00002303  [ 00001181+] 0000004b          *              : args_main.obj (.text)
+                   0000234e  [ 000011a7 ] 00000048          *              : divli.obj (.text)
+                   00002396  [ 000011cb ] 00000042          *   libVercors.lib : configuration_UART.obj (.text)
+                   000023d8  [ 000011ec ] 0000003e          *   rts55x.lib : exit.obj (.text)
+                   00002416  [ 0000120b ] 0000003a          *   libVercors.lib : initialisation_interruptions.obj (.text)
+                   00002450  [ 00001228 ] 00000034          *   rts55x.lib : boot.obj (.text)
+                   00002484  [ 00001242 ] 00000028          *   libVercors.lib : configuration_entrees_sorties.obj (.text)
+                   000024ac  [ 00001256 ] 00000028          *                  : initialisation_dsp.obj (.text)
+                   000024d4  [ 0000126a ] 0000001f          *                  : configuration_SAR_ADC.obj (.text)
+                   000024f3  [ 00001279+] 00000013          *   rts55x.lib : lmpy.obj (.text)
+                   00002506  [ 00001283 ] 00000012          *              : _lock.obj (.text)
+                   00002518  [ 0000128c ] 0000000c          *   programme_principal.obj (.text)
+                   00002524  [ 00001292 ] 00000007          *   rts55x.lib : exit.obj (.text:CIO_breakpoint)
                    0000252b  [ 00001295+] 00000002          *   installation_vecteurs.obj (.text)
                    0000252d  [ 00001296+] 00000002          *   rts55x.lib : vectors.obj (.text)
                    0000252f  [ 00001297 ] 00000001          *   --HOLE-- [fill = 20]
@@ -130,7 +130,7 @@ byte addr   word addr   name
             00004000    .data
 00002000                .text
 00002525                C$$EXIT
-000024ff                I$$LMPY
+000024f3                I$$LMPY
 00ffff00                _Reset
             00000160    __STACK_END
 00000200                __STACK_SIZE
@@ -146,41 +146,43 @@ ffffffff                ___c_args__
 00002530                ___etext__
 ffffffff                ___pinit__
 00002000                ___text__
-000022d6                __args_main
+00002303                __args_main
             00005004    __cleanup_ptr
-00002321                __divli
+0000234e                __divli
 000020ac                __divul
             00005006    __dtors_ptr
             00005000    __lock
-000024ff                __mpyli
-00002522                __nop
-0000251a                __register_lock
-00002512                __register_unlock
+000024f3                __mpyli
+00002516                __nop
+0000250e                __register_lock
+00002506                __register_unlock
             00000060    __stack
             00000160    __sysstack
             00005002    __unlock
 00002524                _abort
 00002184                _allumer_led
-00002289                _auto_init
-0000245c                _c_int00
-00002369                _configuration_de_l_UART
-00002490                _configuration_des_entrees_sorties_TOR
-000024e0                _configuration_du_CAN
+000022b6                _auto_init
+00002450                _c_int00
+00002396                _configuration_de_l_UART
+00002484                _configuration_des_entrees_sorties_TOR
+000024d4                _configuration_du_CAN
 00002000                _configuration_du_TIMER_0
-000021ae                _est_bouton_appuye
+000021db                _est_bouton_appuye
 00002195                _eteindre_led
-000023ab                _exit
+000023d8                _exit
 00002162                _fermer_contacteur
-00002262                _initialisation_CNA_AD7391A
-000023e9                _initialisation_des_interruptions
-000024b8                _initialisation_dsp
+000021cd                _impulsion_maintenant
+0000228f                _initialisation_CNA_AD7391A
+00002416                _initialisation_des_interruptions
+000024ac                _initialisation_dsp
 000021a6                _inverser_led
+000021ae                _inverser_led_pause
 00000500                _l_adresse_de_debut_de_ma_table_des_vecteurs_d_interruption
-00002423                _main
+00002518                _main
 0000214d                _modify_bit_in_address
 00002173                _ouvrir_contacteur
-000021bd                _raccordement_des_peripheriques_aux_broches_du_DSP
-00002227                _sortie_sur_le_CNA_AD7391A
+000021ea                _raccordement_des_peripheriques_aux_broches_du_DSP
+00002254                _sortie_sur_le_CNA_AD7391A
 ffffffff                binit
             00000260    cinit
             00004000    edata
@@ -217,26 +219,28 @@ byte addr   word addr   name
 00002184                _allumer_led
 00002195                _eteindre_led
 000021a6                _inverser_led
-000021ae                _est_bouton_appuye
-000021bd                _raccordement_des_peripheriques_aux_broches_du_DSP
-00002227                _sortie_sur_le_CNA_AD7391A
-00002262                _initialisation_CNA_AD7391A
-00002289                _auto_init
-000022d6                __args_main
-00002321                __divli
-00002369                _configuration_de_l_UART
-000023ab                _exit
-000023e9                _initialisation_des_interruptions
-00002423                _main
-0000245c                _c_int00
-00002490                _configuration_des_entrees_sorties_TOR
-000024b8                _initialisation_dsp
-000024e0                _configuration_du_CAN
-000024ff                I$$LMPY
-000024ff                __mpyli
-00002512                __register_unlock
-0000251a                __register_lock
-00002522                __nop
+000021ae                _inverser_led_pause
+000021cd                _impulsion_maintenant
+000021db                _est_bouton_appuye
+000021ea                _raccordement_des_peripheriques_aux_broches_du_DSP
+00002254                _sortie_sur_le_CNA_AD7391A
+0000228f                _initialisation_CNA_AD7391A
+000022b6                _auto_init
+00002303                __args_main
+0000234e                __divli
+00002396                _configuration_de_l_UART
+000023d8                _exit
+00002416                _initialisation_des_interruptions
+00002450                _c_int00
+00002484                _configuration_des_entrees_sorties_TOR
+000024ac                _initialisation_dsp
+000024d4                _configuration_du_CAN
+000024f3                I$$LMPY
+000024f3                __mpyli
+00002506                __register_unlock
+0000250e                __register_lock
+00002516                __nop
+00002518                _main
 00002524                _abort
 00002525                C$$EXIT
 0000252b                no_isr
@@ -261,4 +265,4 @@ ffffffff                ___pinit__
 ffffffff                binit
 ffffffff                pinit
 
-[65 symbols]
+[67 symbols]

@@ -1,0 +1,52 @@
+#include <libvercors.h>
+
+#define ADDR_OUT    0x1C0A
+#define ADDR_IN    0x1C08
+#define P_OUT (*((ioport int*)ADDR_OUT))
+#define P_IN (*((ioport int*)ADDR_IN))
+
+
+void modify_bit_in_address(ioport int *address, int bit_position, int bit_value) {
+    int preserved_bits = *address & ~(1 << bit_position);
+    *address = preserved_bits | (bit_value << bit_position);
+}
+
+void fermer_contacteur (void){
+    modify_bit_in_address(&P_OUT, 1, 1);
+}
+
+void ouvrir_contacteur (void){
+    modify_bit_in_address(&P_OUT, 1, 0);
+}
+
+void allumer_led (void){
+    modify_bit_in_address(&P_OUT, 0, 1);
+}
+
+void eteindre_led (void){
+    modify_bit_in_address(&P_OUT, 0, 0);
+}
+
+void inverser_led (void){
+	P_OUT ^= (1 << 0);
+}
+
+void inverser_led_pause (void){
+	long int i = 0;
+
+	P_OUT ^= (1 << 0);
+	for(i = 0; i < 3500000; i++){}
+}
+
+void impulsion_led (void){
+	P_OUT |= (1 << 0);
+	P_OUT &= ~(1 << 0);
+}
+
+
+int est_bouton_appuye(void){
+    if((P_IN & (1 << 2)) != 0){
+        return 1;
+    }
+    return 0;
+}

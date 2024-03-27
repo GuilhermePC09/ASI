@@ -1,0 +1,36 @@
+#include <libvercors.h>
+
+#define IER_0	0x00
+#define INTER_AUTH	(*((int*) IER_0))
+#define TIMER_FLAG 	(*((ioport int*) 0x1C14))
+#define POINT_TEST	(*((ioport int*) 0x1C0A))
+
+
+void autoriser_interruption_timer (void) {
+	INTER_AUTH |= (1 << 4);
+}
+
+void ecouter_les_interruptions (void) {
+	asm(" BCLR INTM");
+}
+
+void inverse(int pin) {
+    int addr = 0x1C0A;
+    int *data = (int *)addr;
+    int mask = (1 << pin);
+    int bit = (*data >> pin) & 1;
+
+    if (bit == 0) {
+        *data |= mask;
+    } else {
+        *data &= ~mask;
+    }
+}
+
+interrupt void  isr_timer (void) {
+	TIMER_FLAG |= (1 << 0);
+//	POINT_TEST ^= (1 << 9);
+//	POINT_TEST |= (1 << 9);
+//	POINT_TEST &= ~(1 << 9);
+	inverse(9);
+}

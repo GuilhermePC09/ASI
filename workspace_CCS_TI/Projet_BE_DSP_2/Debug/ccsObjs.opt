@@ -1,0 +1,1 @@
+"./programme_principal.obj" "./interruptions.obj" "./installation_vecteurs.obj" -l"libc.a" -llibVercors.lib "../C5515.cmd" 
