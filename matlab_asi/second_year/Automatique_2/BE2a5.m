@@ -24,7 +24,7 @@ E = [1 ; 0];
 C = [0  1];
 D = 0;
 
-sys = ss(A, [B E], eye(2), D,'Statename',{'v','w'},'Inputname',{'ig','\eta_w'},'Outputname',{'v','w'});
+sys = ss(A, [B E], eye(2), D,'Statename',{'v','w'},'Inputname',{'ig','\eta_w'},'Outputname',{'v','w'})
 tf_sys = tf(sys);
 
 %% Analyse du système
@@ -41,58 +41,50 @@ rank(Ctr)
 O = obsv(A, C)
 rank(O)
 
+% simulation en boucle ouverte
+
+figure(2)
+initial(sys, [v0,w0]);
+
+figure(3)
+step(sys);
+
 %% observateur
 
 V = 1 ;
 W = eye(2) ;
 K = lqr(A',C',W,V)' ;
-
 erreur1 = ss ((A-K*C),[-E K],eye(2),D, 'Statename',{'v','w'},'Inputname',{'eta_w','eta_v'},'Outputname',{'erreur_v','erreur_w'});
-initial(erreur1,[v0 w0])
 
 V = 1 ;
 W = 1000*E*E' ;
 K = lqr(A',C',W,V)' ;
-
 erreur2 = ss ((A-K*C),[-E K],eye(2),D, 'Statename',{'v','w'},'Inputname',{'eta_w','eta_v'},'Outputname',{'erreur_v','erreur_w'});
-initial(erreur2,[v0 w0])
 
 V = 0.001 ;
 W = 1000*E*E' ;
 K = lqr(A',C',W,V)' ;
-
 erreur3 = ss ((A-K*C),[-E K],eye(2),D, 'Statename',{'v','w'},'Inputname',{'eta_w','eta_v'},'Outputname',{'erreur_v','erreur_w'});
-initial(erreur3,[v0 w0])
-
-V = 0.001 ;
-W = eye(2) ;
-K = lqr(A',C',W,V)' ;
-
-erreur4 = ss ((A-K*C),[-E K],eye(2),D, 'Statename',{'v','w'},'Inputname',{'eta_w','eta_v'},'Outputname',{'erreur_v','erreur_w'});
-initial(erreur4,[v0 w0])
-
-initial(sys, [v0,w0])
-step(sys)
-
-figure(6) 
-initial(erreur1,'b',erreur2,'g',erreur3,'r',erreur4,'y',[v0,w0]) ; title ('erreur initiale des 4 erreurs')
-
-figure(5)
-bodemag(erreur1,'b',erreur2,'g',erreur3,'r',erreur4,'y') ; title ('bodemag des 4 erreurs')
-
-step(erreur1,'b',erreur2,'g',erreur3,'r',erreur4,'y')
-
-%% Commande par retour d'état
 
 V = 0.001;
-W = 1000*E*E';
+W = eye(2);
 K = lqr(A',C',W,V)';
+erreur4 = ss ((A-K*C),[-E K],eye(2),D, 'Statename',{'v','w'},'Inputname',{'eta_w','eta_v'},'Outputname',{'erreur_v','erreur_w'});
 
-erreur = ss((A-K*C),[-E K],eye(2),D, 'Statename',{'v','w'},'Inputname',{'eta_w','eta_v'},'Outputname',{'erreur_v','erreur_w'});
-sysC = ss(A, B, C, 0);
+figure(4) 
+initial(erreur1,'b',erreur2,'g',erreur3,'r',erreur4,'y',[v0,w0]) ; title ('erreur initiale des 4 erreurs');
 
+figure(5)
+bodemag(erreur1,'b',erreur2,'g',erreur3,'r',erreur4,'y') ; title ('bodemag des 4 erreurs');
+
+figure(6)
+step(erreur1,'b',erreur2,'g',erreur3,'r',erreur4,'y');
+
+%% Commande par retour d'état
 L = [-lambda/r 1];
-Q = (Ce')*Ce;
+sysC = ss(A,B,C,0);
+
+Q = (L')*L;
 R = 0.001;
 F = lqr(sysC, Q, R);
 
@@ -103,15 +95,15 @@ R2 = 100;
 F2 = lqr(sysC, Q, R2);
 
 syst_u = ss(A-B*F,[],-F,0) ;
-syst_z = ss(A-B*F,[],Ce,0) ;
+syst_z = ss(A-B*F,[],L,0) ;
 
 syst_u1 = ss(A-B*F1,[],-F1,0) ;
-syst_z1 = ss(A-B*F1,[],Ce,0) ;
+syst_z1 = ss(A-B*F1,[],L,0) ;
 
 syst_u2 = ss(A-B*F2,[],-F2,0) ;
-syst_z2 = ss(A-B*F2,[],Ce,0) ;
+syst_z2 = ss(A-B*F2,[],L,0) ;
 
-figure(8);
+figure(7);
 
 subplot(221);
 initial(syst_u, 'b', syst_u1, 'r', [5; 5*lambda/r]);
@@ -136,10 +128,13 @@ legend('syst_z', 'syst_z2');
 syst_RE = ss(A-B*F,[],C,0) ;
 BFPoles = eig(A-B*F)
 
-syst_u_pert = ss(A-B*F,E,-F,0) ; syst_z_pert = ss(A-B*F,E,Ce,0) ;
-syst_u_pert1 = ss(A-B*F1,E,-F1,0) ; syst_z_pert1 = ss(A-B*F1,E,Ce,0) ;
+syst_u_pert = ss(A-B*F,E,-F,0) ; 
+syst_z_pert = ss(A-B*F,E,L,0) ;
 
-figure(10) ;
+syst_u_pert1 = ss(A-B*F1,E,-F1,0) ; 
+syst_z_pert1 = ss(A-B*F1,E,L,0) ;
+
+figure(8) ;
 
 subplot(211) ; 
 bodemag(syst_u_pert,'b',syst_u_pert1,'r') ; 
